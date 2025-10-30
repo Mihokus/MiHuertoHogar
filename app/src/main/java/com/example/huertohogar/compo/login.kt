@@ -1,5 +1,6 @@
 package com.example.huertohogar.compo
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -60,8 +61,9 @@ fun FormularioValidacion(modifier: Modifier = Modifier) {
                 .size(180.dp)
                 .clip(CircleShape)
                 .padding(8.dp)
-
+                .background(Color.White)
         )
+        Spacer(modifier = Modifier.height(30.dp))
 
         OutlinedTextField(
             value = email,
@@ -143,7 +145,7 @@ fun FormularioValidacion(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth().height(60.dp)
 
         ) {
-            Text("Iniciar sesión", fontSize = 35.sp)
+            Text("Iniciar sesión", fontSize = 25.sp)
         }
 
         if (mensajeExito.isNotEmpty()) {
