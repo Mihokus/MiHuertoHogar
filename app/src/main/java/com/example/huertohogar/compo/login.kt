@@ -31,7 +31,7 @@ import androidx.compose.ui.draw.clip
 import com.example.huertohogar.R
 
 @Composable
-fun FormularioValidacion(modifier: Modifier = Modifier) {
+fun FormularioValidacion(modifier: Modifier = Modifier, loginExitoso: ()-> Unit) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -137,6 +137,7 @@ fun FormularioValidacion(modifier: Modifier = Modifier) {
                 if (emailError.isEmpty() && passwordError.isEmpty()){
                     if (email == emailCorrecto && password == contraseñaCorrecta){
                         mensajeExito = "Inicio de sesion exitoso"
+                        loginExitoso()
                     } else {
                         mensajeExito = "Error en las credenciales"
                     }

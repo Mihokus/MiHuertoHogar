@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.huertohogar.compo.FormularioValidacion
+import com.example.huertohogar.compo.NavegacionPantallas
 
 
 class MainActivity : ComponentActivity() {
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Scaffold { innerPadding ->
-                FormularioValidacion(modifier = Modifier.padding(innerPadding))
+                NavegacionPantallas(modifier = Modifier.padding(innerPadding))
             }
 
         }
