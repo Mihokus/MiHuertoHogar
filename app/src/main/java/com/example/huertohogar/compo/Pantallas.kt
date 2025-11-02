@@ -1,5 +1,11 @@
 package com.example.huertohogar.compo
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -13,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
 fun NavegacionPantallas(modifier: Modifier = Modifier) {
@@ -61,10 +68,10 @@ fun PantallaPrincipal() {
 @Composable
 fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
     val items = listOf(
-        PantallaItem("inicio", "Inicio"),
-        PantallaItem("stock", "Stock"),
-        PantallaItem("producto", "Producto"),
-        PantallaItem("ajuste", "Ajuste")
+        PantallaItem("inicio", "Inicio",Icons.Filled.Home),
+        PantallaItem("stock", "Stock",Icons.Filled.ShoppingCart),
+        PantallaItem("producto", "Producto",Icons.Filled.AddCircle),
+        PantallaItem("ajuste", "Ajuste",Icons.Filled.Settings)
     )
 
     NavigationBar {
@@ -73,7 +80,7 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
 
         items.forEach { pantalla ->
             NavigationBarItem(
-                icon = {},
+                icon = { Icon(pantalla.icono, contentDescription = pantalla.titulo)},
                 label = { Text(pantalla.titulo) },
                 selected = currentDestination?.route == pantalla.ruta,
                 onClick = {
@@ -87,7 +94,7 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
     }
 }
 
-data class PantallaItem(val ruta: String, val titulo: String)
+data class PantallaItem(val ruta: String, val titulo: String, val icono: ImageVector)
 
 @Composable
 fun PantallaInicio() {
