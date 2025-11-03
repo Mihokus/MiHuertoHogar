@@ -1,5 +1,6 @@
 package com.example.huertohogar.compo
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Home
@@ -20,6 +21,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.ui.Alignment
+
 
 @Composable
 fun NavegacionPantallas(modifier: Modifier = Modifier) {
@@ -41,12 +47,12 @@ fun NavegacionPantallas(modifier: Modifier = Modifier) {
             )
         }
         composable("principal") {
-            PantallaPrincipal()
+            PantallaPrincipal(rootNavController = navController)
         }
     }
 }
-@Composable
-fun PantallaPrincipal() {
+@Composable()
+fun PantallaPrincipal(rootNavController: androidx.navigation.NavHostController) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -60,7 +66,7 @@ fun PantallaPrincipal() {
             composable("inicio") { PantallaInicio() }
             composable("stock") { PantallaStock() }
             composable("producto") { PantallaProducto() }
-            composable("ajuste") { PantallaAjuste() }
+            composable("ajuste") { PantallaAjuste(rootNavController) }
         }
     }
 }
@@ -74,13 +80,13 @@ fun BottomNavigationBar(navController: androidx.navigation.NavHostController) {
         PantallaItem("ajuste", "Ajuste",Icons.Filled.Settings)
     )
 
-    NavigationBar {
+    NavigationBar(containerColor = MaterialTheme.colorScheme.background) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
         items.forEach { pantalla ->
             NavigationBarItem(
-                icon = { Icon(pantalla.icono, contentDescription = pantalla.titulo)},
+                icon = { Icon(pantalla.icono, contentDescription = pantalla.titulo, modifier = Modifier.size(28.dp))},
                 label = { Text(pantalla.titulo) },
                 selected = currentDestination?.route == pantalla.ruta,
                 onClick = {
@@ -112,8 +118,24 @@ fun PantallaProducto() {
 }
 
 @Composable
-fun PantallaAjuste() {
-    Text("", style = MaterialTheme.typography.headlineSmall)
+fun PantallaAjuste(navController: androidx.navigation.NavHostController) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("⚙️ Configuración y Ajustes", style = MaterialTheme.typography.headlineSmall)
+        Spacer(modifier = Modifier.height(24.dp))
+        Button(onClick = {
+            navController.navigate("Login") {
+                popUpTo(navController.graph.startDestinationId) { inclusive = true }
+            }
+        }) {
+            Text("Cerrar sesión")
+        }
+    }
 }
 
 
