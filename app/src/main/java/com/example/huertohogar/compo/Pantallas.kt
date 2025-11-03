@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -132,8 +133,8 @@ fun PantallaAjuste(navController: androidx.navigation.NavHostController) {
             navController.navigate("Login") {
                 popUpTo(navController.graph.startDestinationId) { inclusive = true }
             }
-        }) {
-            Text("Cerrar sesión")
+        }, modifier = Modifier.fillMaxWidth().height(60.dp)) {
+            Text("Cerrar sesión",fontSize = 25.sp)
         }
     }
 }
