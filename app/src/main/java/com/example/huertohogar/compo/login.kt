@@ -43,8 +43,8 @@ fun FormularioValidacion(modifier: Modifier = Modifier, loginExitoso: ()-> Unit)
 
     var mensajeExito by remember { mutableStateOf("") }
 
-    var emailCorrecto = "adminHuerto@gmail.com"
-    var contraseñaCorrecta = "Huerto1234"
+    var emailCorrecto = "adminHuertos@gmail.com"
+    var contraseñaCorrecta = "Huerto1234L"
 
     Column(
         modifier = modifier
