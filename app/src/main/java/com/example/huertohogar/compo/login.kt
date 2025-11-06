@@ -29,20 +29,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
 import com.example.huertohogar.R
-
 @Composable
 fun FormularioValidacion(modifier: Modifier = Modifier, loginExitoso: ()-> Unit) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
-
     var emailError by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
-
-
     var mensajeExito by remember { mutableStateOf("") }
-
     var emailCorrecto = "adminHuerto@gmail.com"
     var contraseñaCorrecta = "Huerto1234"
 
