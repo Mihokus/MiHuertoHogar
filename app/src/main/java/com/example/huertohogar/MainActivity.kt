@@ -10,12 +10,12 @@ import com.example.huertohogar.compo.NavegacionPantallas
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             Scaffold { innerPadding ->
                 NavegacionPantallas(modifier = Modifier.padding(innerPadding))
             }
-
         }
     }
 }

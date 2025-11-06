@@ -1,33 +1,42 @@
 package com.example.huertohogar.compo
 
+import ProductoViewModel
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.huertohogar.viewmodel.ProductoViewModel
 
 @Composable
-fun PantallaProducto(modifier: Modifier = Modifier, productoViewModel: ProductoViewModel = viewModel()) {
+fun PantallaProducto(
+    modifier: Modifier = Modifier,
+    productoViewModel: ProductoViewModel = viewModel()
+) {
+    val scrollState = rememberScrollState()
     val context = LocalContext.current
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         productoViewModel.imagenUri.value = uri
     }
 
     Column(
-        modifier = modifier.fillMaxSize().padding(16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(scrollState),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -67,7 +76,10 @@ fun PantallaProducto(modifier: Modifier = Modifier, productoViewModel: ProductoV
         Spacer(modifier = Modifier.height(16.dp))
 
         Box(
-            modifier = Modifier.size(150.dp).clip(RoundedCornerShape(8.dp)).background(Color.LightGray),
+            modifier = Modifier
+                .size(150.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.LightGray),
             contentAlignment = Alignment.Center
         ) {
             if (productoViewModel.imagenUri.value != null) {
@@ -82,18 +94,35 @@ fun PantallaProducto(modifier: Modifier = Modifier, productoViewModel: ProductoV
         }
 
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = { launcher.launch("image/*") }) { Text("Seleccionar foto") }
+
+        Button(onClick = { launcher.launch("image/*") }) {
+            Text("Seleccionar foto")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
+
         Button(
             onClick = { productoViewModel.agregarProducto() },
             modifier = Modifier.fillMaxWidth().height(50.dp)
-        ) { Text("Crear Producto") }
+        ) {
+            Text("Crear Producto")
+        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
+
         productoViewModel.productos.forEach { producto ->
-            Card(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), elevation = CardDefaults.cardElevation(4.dp)) {
-                Row(modifier = Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                elevation = CardDefaults.cardElevation(4.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     if (producto.imagenUri != null) {
                         Image(
                             painter = rememberAsyncImagePainter(producto.imagenUri),

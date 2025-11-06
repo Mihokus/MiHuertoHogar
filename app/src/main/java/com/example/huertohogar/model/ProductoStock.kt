@@ -1,5 +1,6 @@
 package com.example.huertohogar.model
 
-class ProductoStock (
+data class ProductoStock (
     val nombre: String,
-    val cantidad: Int)
+    val cantidad: Int
+)
